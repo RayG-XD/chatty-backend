@@ -20,5 +20,3 @@ export function joiValidation(schema: ObjectSchema): IJoiDecorator {
     return descriptor;
   };
 }
-
-
