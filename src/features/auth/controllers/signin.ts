@@ -4,11 +4,10 @@ import JWT from 'jsonwebtoken';
 import { joiValidation } from '@global/decorators/joi-validation.decorators';
 import HTTP_STATUS from 'http-status-codes';
 import { authService } from '@service/db/auth.service';
-import { BadRequestError } from 'src/shared/globals/helpers/error-handler';
 import { loginSchema } from '@auth/schemes/signin';
 import { IAuthDocument } from '@auth/interfaces/auth.interface';
-import { IUserDocument } from '@user/interfaces/user.interface';
-import { userService } from '@service/db/user.service';
+import { BadRequestError } from '@global/helpers/error-handler';
+import { mailTransport } from '@service/emails/mail.transport';
 
 export class SignIn {
   @joiValidation(loginSchema)
@@ -19,15 +18,14 @@ export class SignIn {
       throw new BadRequestError('Invalid credentials');
     }
 
-
     const passwordsMatch: boolean = await existingUser.comparePassword(password);
     if (!passwordsMatch) {
       throw new BadRequestError('Invalid credentials');
     }
-    const user: IUserDocument = await userService.getUserByAuthId(`${existingUser._id}`);
+
     const userJwt: string = JWT.sign(
       {
-        userId: user._id,
+        userId: existingUser._id,
         uId: existingUser.uId,
         email: existingUser.email,
         username: existingUser.username,
@@ -35,16 +33,8 @@ export class SignIn {
       },
       config.JWT_TOKEN!
     );
+    await mailTransport.sendEmail('emelie.dare25@ethereal.email', 'Test development email for Chatty App', 'This is a test email. Hello Pratik, Devansh, Fahad, Vidhiti');
     req.session = { jwt: userJwt };
-    const userDocument: IUserDocument = {
-      ...user,
-      authId: existingUser!._id,
-      username: existingUser!.username,
-      email: existingUser!.email,
-      avatarColor: existingUser!.avatarColor,
-      uId: existingUser!.uId,
-      createdAt: existingUser!.createdAt,
-    } as IUserDocument;
-    res.status(HTTP_STATUS.OK).json({ message: 'User login successfully', user: userDocument, token: userJwt });
+    res.status(HTTP_STATUS.OK).json({ message: 'User login successfully', user: existingUser, token: userJwt });
   }
 }
