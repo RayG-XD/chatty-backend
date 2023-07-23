@@ -7,7 +7,12 @@ import { authService } from '@service/db/auth.service';
 import { loginSchema } from '@auth/schemes/signin';
 import { IAuthDocument } from '@auth/interfaces/auth.interface';
 import { BadRequestError } from '@global/helpers/error-handler';
-import { mailTransport } from '@service/emails/mail.transport';
+import { forgotPasswordTemplate } from '@service/emails/templates/forgot-password/forgot-password-template';
+import { emailQueue } from '@service/queues/email.queue';
+import moment from 'moment';
+import publicIP from 'ip';
+import { IResetPasswordParams } from '@user/interfaces/user.interface';
+import { resetPasswordTemplate } from '@service/emails/templates/reset-password/reset-password-template';
 
 export class SignIn {
   @joiValidation(loginSchema)
@@ -33,7 +38,14 @@ export class SignIn {
       },
       config.JWT_TOKEN!
     );
-    await mailTransport.sendEmail('emelie.dare25@ethereal.email', 'Test development email for Chatty App', 'This is a test email. Hello Pratik, Devansh, Fahad, Vidhiti');
+    const templateParams: IResetPasswordParams = {
+      username: existingUser.username!,
+      email: existingUser.email!,
+      ipaddress: publicIP.address(),
+      date: moment().format('DD/MM/YYYY HH:mm')
+    };
+    const template: string = resetPasswordTemplate.passwordResetConfirmationTemplate(templateParams);
+    emailQueue.addEmailJob('forgotPasswordEmail', { template, receiverEmail: 'micah97@ethereal.email', subject: 'Password Reset Confirmation'});
     req.session = { jwt: userJwt };
     res.status(HTTP_STATUS.OK).json({ message: 'User login successfully', user: existingUser, token: userJwt });
   }
