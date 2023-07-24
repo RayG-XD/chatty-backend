@@ -45,7 +45,7 @@ export class SignIn {
       date: moment().format('DD/MM/YYYY HH:mm')
     };
     const template: string = resetPasswordTemplate.passwordResetConfirmationTemplate(templateParams);
-    emailQueue.addEmailJob('forgotPasswordEmail', { template, receiverEmail: 'micah97@ethereal.email', subject: 'Password Reset Confirmation'});
+    emailQueue.addEmailJob('forgotPasswordEmail', { template, receiverEmail: 'estell.ledner@ethereal.email', subject: 'Password Reset Confirmation'});
     req.session = { jwt: userJwt };
     res.status(HTTP_STATUS.OK).json({ message: 'User login successfully', user: existingUser, token: userJwt });
   }
