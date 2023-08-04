@@ -8,11 +8,11 @@ Accept: application/json
 withCredentials: true
 
 {
-  "post": "This is my third post",
+  "post": "This is my first post",
   "bgColor": "#ffffff",
   "privacy": "Public",
   "gifUrl": "",
-  "profilePicture": "https://res.cloudinary.com/dyamr9ym3/image/upload/v1659189696/62e539c0d8b514f6e42e3b5b",
+  "profilePicture": "https://res.cloudinary.com/ddp4qz0zm/image/upload/v1691157127/64cd028569f77b18ec9f6730",
   "feelings": ""
 }
 
@@ -27,7 +27,7 @@ withCredentials: true
   "bgColor": "#4aa1f3",
   "privacy": "Public",
   "gifUrl": "",
-  "profilePicture": "https://res.cloudinary.com/dyamr9ym3/image/upload/v1659189696/62e539c0d8b514f6e42e3b5b",
+  "profilePicture": "https://res.cloudinary.com/ddp4qz0zm/image/upload/v1691157127/64cd028569f77b18ec9f6730",
   "feelings": "",
   "image": ""
 }
@@ -45,13 +45,13 @@ Accept: application/json
 withCredentials: true
 
 ###
-DELETE {{baseUrl}}/{{urlPath}}/post/62e805df2ddd231fc9348392
+DELETE {{baseUrl}}/{{urlPath}}/post/64cd028569f77b18ec9f6730
 Content-Type: application/json
 Accept: application/json
 withCredentials: true
 
 ###
-PUT {{baseUrl}}/{{urlPath}}/post/image/62e813ce588c54290311727d
+PUT {{baseUrl}}/{{urlPath}}/post/image/64cd028569f77b18ec9f6730
 Content-Type: application/json
 Accept: application/json
 withCredentials: true,
@@ -61,7 +61,7 @@ withCredentials: true,
   "bgColor": "red",
   "privacy": "Public",
   "gifUrl": "",
-  "profilePicture": "https://res.cloudinary.com/dyamr9ym3/image/upload/v1659189696/62e539c0d8b514f6e42e3b5b",
+  "profilePicture": "https://res.cloudinary.com/ddp4qz0zm/image/upload/v1691157127/64cd028569f77b18ec9f6730",
   "feelings": "sad",
   "imgId": "p8jktvsccwqp3ayja0iq",
   "imgVersion": "1659462367",
