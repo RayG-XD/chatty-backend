@@ -12,4 +12,3 @@ class ForgotPasswordTemplate {
 }
 
 export const forgotPasswordTemplate: ForgotPasswordTemplate = new ForgotPasswordTemplate();
-
