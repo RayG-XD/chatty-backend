@@ -16,4 +16,3 @@ class ResetPasswordTemplate {
 }
 
 export const resetPasswordTemplate: ResetPasswordTemplate = new ResetPasswordTemplate();
-
