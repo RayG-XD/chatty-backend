@@ -18,9 +18,11 @@
   "dependencies": {
     "@bull-board/express": "^5.7.1",
     "@bull-board/ui": "^5.7.1",
-    "@sendgrid/mail": "^7.7.0",
+    "@jest/types": "^29.6.3",
+    "@sendgrid/mail": "^8.1.0",
     "@socket.io/redis-adapter": "^8.2.1",
-    "@types/jest": "^29.5.3",
+    "@types/jest": "^29.5.11",
+    "axios": "^1.6.5",
     "bcryptjs": "^2.4.3",
     "bull": "^4.10.4",
     "bullmq": "^4.6.0",
