@@ -183,7 +183,7 @@ jobs:
             cd deployment/
             terraform init
             terraform workspace select ${CIRCLE_BRANCH} || terraform workspace new ${CIRCLE_BRANCH}
-            terraform plan
+            terraform plandefault
       - run:
           name: Terraform apply
           command: |
@@ -202,7 +202,7 @@ jobs:
       - run:
           name: Upload project to S3
           command: |
-            aws --region ap-south-1 s3 cp chatapp.zip s3://<variable-prefix>-${CIRCLE_BRANCH}-app
+            aws --region ap-south-1 s3 cp chatapp.zip s3://edusticapp-server-${CIRCLE_BRANCH}-app
       - *notify-on-fail
 
   push-to-aws-code-deploy:
@@ -218,11 +218,11 @@ jobs:
             then
                 aws deploy create-deployment \
                     --region ap-south-1 \
-                    --application-name <variable-prefix>-${CIRCLE_BRANCH}-app \
+                    --application-name edusticapp-server-${CIRCLE_BRANCH}-app \
                     --deployment-config-name CodeDeployDefault.AllAtOnce \
-                    --deployment-group-name <variable-prefix>-${CIRCLE_BRANCH}-group \
+                    --deployment-group-name edusticapp-server-${CIRCLE_BRANCH}-group \
                     --file-exists-behavior "OVERWRITE" \
-                    --s3-location bucket=<variable-prefix>-${CIRCLE_BRANCH}-app,bundleType=zip,key=chatapp.zip
+                    --s3-location bucket=edusticapp-server-${CIRCLE_BRANCH}-app,bundleType=zip,key=chatapp.zip
             fi
       - *notify-on-fail
 
