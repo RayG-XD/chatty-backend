@@ -43,7 +43,7 @@ export const followerData = {
     avatarColor: '#ff9800',
     followersCount: 3,
     followingCount: 5,
-    profilePicture: 'https://res.cloudinary.com/ratingapp/image/upload/605727cd646eb50e668a4e13'
+    profilePicture: 'https://res.cloudinary.com/ddp4qz0zm/image/upload/605727cd646eb50e668a4e13'
   },
   followeeId: {
     username: 'Danny',
@@ -51,6 +51,6 @@ export const followerData = {
     avatarColor: '#ff9800',
     followersCount: 3,
     followingCount: 5,
-    profilePicture: 'https://res.cloudinary.com/ratingapp/image/upload/605727cd646eb50e668a4e13'
+    profilePicture: 'https://res.cloudinary.com/ddp4qz0zm/image/upload/605727cd646eb50e668a4e13'
   }
 };
