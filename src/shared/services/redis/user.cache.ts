@@ -39,60 +39,37 @@ export class UserCache extends BaseCache {
       bgImageVersion,
       social
     } = createdUser;
-    const firstList: string[] = [
-      '_id',
-      `${_id}`,
-      'uId',
-      `${uId}`,
-      'username',
-      `${username}`,
-      'email',
-      `${email}`,
-      'avatarColor',
-      `${avatarColor}`,
-      'createdAt',
-      `${createdAt}`,
-      'postsCount',
-      `${postsCount}`
-    ];
-    const secondList: string[] = [
-      'blocked',
-      JSON.stringify(blocked),
-      'blockedBy',
-      JSON.stringify(blockedBy),
-      'profilePicture',
-      `${profilePicture}`,
-      'followersCount',
-      `${followersCount}`,
-      'followingCount',
-      `${followingCount}`,
-      'notifications',
-      JSON.stringify(notifications),
-      'social',
-      JSON.stringify(social)
-    ];
-    const thirdList: string[] = [
-      'work',
-      `${work}`,
-      'location',
-      `${location}`,
-      'school',
-      `${school}`,
-      'quote',
-      `${quote}`,
-      'bgImageVersion',
-      `${bgImageVersion}`,
-      'bgImageId',
-      `${bgImageId}`
-    ];
-    const dataToSave: string[] = [...firstList, ...secondList, ...thirdList];
+    const dataToSave = {
+      '_id': `${_id}`,
+      'uId': `${uId}`,
+      'username': `${username}`,
+      'email': `${email}`,
+      'avatarColor': `${avatarColor}`,
+      'createdAt': `${createdAt}`,
+      'postsCount': `${postsCount}`,
+      'blocked': JSON.stringify(blocked),
+      'blockedBy': JSON.stringify(blockedBy),
+      'profilePicture': `${profilePicture}`,
+      'followersCount': `${followersCount}`,
+      'followingCount': `${followingCount}`,
+      'notifications': JSON.stringify(notifications),
+      'social': JSON.stringify(social),
+      'work': `${work}`,
+      'location': `${location}`,
+      'school': `${school}`,
+      'quote': `${quote}`,
+      'bgImageVersion': `${bgImageVersion}`,
+      'bgImageId': `${bgImageId}`
+    };
 
     try {
       if (!this.client.isOpen) {
         await this.client.connect();
       }
       await this.client.ZADD('user', { score: parseInt(userUId, 10), value: `${key}` });
-      await this.client.HSET(`users:${key}`, dataToSave);
+      for (const [itemKey, itemValue] of Object.entries(dataToSave)) {
+        await this.client.HSET(`users:${key}`, `${itemKey}`, `${itemValue}`);
+      }
     } catch (error) {
       log.error(error);
       throw new ServerError('Server error. Try again.');
@@ -136,14 +113,14 @@ export class UserCache extends BaseCache {
       }
       const response: string[] = await this.client.ZRANGE('user', start, end, { REV: true });
       const multi: ReturnType<typeof this.client.multi> = this.client.multi();
-      for(const key of response) {
-        if(key !== excludedUserKey) {
+      for (const key of response) {
+        if (key !== excludedUserKey) {
           multi.HGETALL(`users:${key}`);
         }
       }
-      const replies: UserCacheMultiType = await multi.exec() as UserCacheMultiType;
+      const replies: UserCacheMultiType = (await multi.exec()) as UserCacheMultiType;
       const userReplies: IUserDocument[] = [];
-      for(const reply of replies as IUserDocument[]) {
+      for (const reply of replies as IUserDocument[]) {
         reply.createdAt = new Date(Helpers.parseJson(`${reply.createdAt}`));
         reply.postsCount = Helpers.parseJson(`${reply.postsCount}`);
         reply.blocked = Helpers.parseJson(`${reply.blocked}`);
@@ -178,16 +155,16 @@ export class UserCache extends BaseCache {
       const followers: string[] = await this.client.LRANGE(`followers:${userId}`, 0, -1);
       const users: string[] = await this.client.ZRANGE('user', 0, -1);
       const randomUsers: string[] = Helpers.shuffle(users).slice(0, 10);
-      for(const key of randomUsers) {
+      for (const key of randomUsers) {
         const followerIndex = indexOf(followers, key);
         if (followerIndex < 0) {
-          const userHash: IUserDocument = await this.client.HGETALL(`users:${key}`) as unknown as IUserDocument;
+          const userHash: IUserDocument = (await this.client.HGETALL(`users:${key}`)) as unknown as IUserDocument;
           replies.push(userHash);
         }
       }
       const excludedUsernameIndex: number = findIndex(replies, ['username', excludedUsername]);
       replies.splice(excludedUsernameIndex, 1);
-      for(const reply of replies) {
+      for (const reply of replies) {
         reply.createdAt = new Date(Helpers.parseJson(`${reply.createdAt}`));
         reply.postsCount = Helpers.parseJson(`${reply.postsCount}`);
         reply.blocked = Helpers.parseJson(`${reply.blocked}`);
@@ -216,9 +193,8 @@ export class UserCache extends BaseCache {
       if (!this.client.isOpen) {
         await this.client.connect();
       }
-      const dataToSave: string[] = [`${prop}`, JSON.stringify(value)];
-      await this.client.HSET(`users:${userId}`, dataToSave);
-      const response: IUserDocument = await this.getUserFromCache(userId) as IUserDocument;
+      await this.client.HSET(`users:${userId}`, `${prop}`, JSON.stringify(value));
+      const response: IUserDocument = (await this.getUserFromCache(userId)) as IUserDocument;
       return response;
     } catch (error) {
       log.error(error);
@@ -238,5 +214,4 @@ export class UserCache extends BaseCache {
       throw new ServerError('Server error. Try again.');
     }
   }
-
 }

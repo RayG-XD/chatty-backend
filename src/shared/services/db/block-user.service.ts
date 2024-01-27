@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 import { PushOperator } from 'mongodb';
 import { UserModel } from '@user/models/user.schema';
 
@@ -7,7 +7,7 @@ class BlockUserService {
     UserModel.bulkWrite([
       {
         updateOne: {
-          filter: { _id: userId, blocked: { $ne: new mongoose.Types.ObjectId(followerId) } },
+          filter: { _id: new mongoose.Types.ObjectId(userId), blocked: { $ne: new mongoose.Types.ObjectId(followerId) } },
           update: {
             $push: {
               blocked: new mongoose.Types.ObjectId(followerId)
@@ -17,14 +17,14 @@ class BlockUserService {
       },
       {
         updateOne: {
-          filter: { _id: followerId, blockedBy: { $ne: new mongoose.Types.ObjectId(userId) } },
+          filter: { _id: new mongoose.Types.ObjectId(followerId), blockedBy: { $ne: new mongoose.Types.ObjectId(userId) } },
           update: {
             $push: {
               blockedBy: new mongoose.Types.ObjectId(userId)
             } as PushOperator<Document>
           }
         }
-      },
+      }
     ]);
   }
 
@@ -32,7 +32,7 @@ class BlockUserService {
     UserModel.bulkWrite([
       {
         updateOne: {
-          filter: { _id: userId },
+          filter: { _id: new mongoose.Types.ObjectId(userId) },
           update: {
             $pull: {
               blocked: new mongoose.Types.ObjectId(followerId)
@@ -42,14 +42,14 @@ class BlockUserService {
       },
       {
         updateOne: {
-          filter: { _id: followerId },
+          filter: { _id: new mongoose.Types.ObjectId(followerId) },
           update: {
             $pull: {
               blockedBy: new mongoose.Types.ObjectId(userId)
             } as PushOperator<Document>
           }
         }
-      },
+      }
     ]);
   }
 }
