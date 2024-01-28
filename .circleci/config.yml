@@ -183,7 +183,7 @@ jobs:
             cd deployment/
             terraform init
             terraform workspace select ${CIRCLE_BRANCH} || terraform workspace new ${CIRCLE_BRANCH}
-            terraform plandefault
+            terraform plan
       - run:
           name: Terraform apply
           command: |
