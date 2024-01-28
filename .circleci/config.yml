@@ -176,14 +176,14 @@ jobs:
       - checkout
       - *show-current-branch-name
       - aws-cli/setup:
-          profile-name: default
+          profile_name: default
       - run:
           name: Terraform plan
           command: |
             cd deployment/
             terraform init
             terraform workspace select ${CIRCLE_BRANCH} || terraform workspace new ${CIRCLE_BRANCH}
-            terraform plandefault
+            terraform plan
       - run:
           name: Terraform apply
           command: |
@@ -197,7 +197,7 @@ jobs:
     steps:
       - checkout
       - aws-cli/setup:
-          profile-name: default
+          profile_name: default
       - *zip-project
       - run:
           name: Upload project to S3
@@ -210,7 +210,7 @@ jobs:
     steps:
       - checkout
       - aws-cli/setup:
-          profile-name: default
+          profile_name: default
       - run:
           name: Deploy changes with AWS code deploy
           command: |
