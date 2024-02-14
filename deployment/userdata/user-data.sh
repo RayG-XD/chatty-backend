@@ -37,10 +37,10 @@ fi
 
 cd /home/ec2-user
 
-git clone -b main https://github.com/RayG-XD/chatty-backend.git
+git clone -b develop https://github.com/RayG-XD/chatty-backend.git
 cd chatty-backend
 npm install
-aws s3 sync s3://edustic-chattyapp-env-files/develop .
+aws s3 sync s3://edustic-chattyapp-env-files/backend/develop .
 unzip env-file.zip
 cp .env.develop .env
 npm run build

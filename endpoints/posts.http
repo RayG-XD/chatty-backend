@@ -2,17 +2,34 @@
 @urlPath = api/v1
 
 ###
+GET {{baseUrl}}/{{urlPath}}/post/all/<page-number>
+# GET {{baseUrl}}/{{urlPath}}/post/all/1
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+###
+GET {{baseUrl}}/{{urlPath}}/post/images/<page-number>
+# GET {{baseUrl}}/{{urlPath}}/post/images/1
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+###
 POST {{baseUrl}}/{{urlPath}}/post
 Content-Type: application/json
 Accept: application/json
 withCredentials: true
 
+# Privacy - Public | Private | Followers
+# Feelings - like | love | wow | happy | sad | angry
+
 {
-  "post": "Nice one people",
-  "bgColor": "#ffffff",
+  "post": "",
+  "bgColor": "<any-hex-color-code>",
   "privacy": "Public",
   "gifUrl": "",
-  "profilePicture": "https://res.cloudinary.com/ddp4qz0zm/image/upload/v1691157127/64cd028569f77b18ec9f6730",
+  "profilePicture": "<cloudinary-user-profile-picture-url>",
   "feelings": ""
 }
 
@@ -23,47 +40,50 @@ Accept: application/json
 withCredentials: true
 
 {
-  "post": "Post with image created",
-  "bgColor": "#4aa1f3",
-  "privacy": "Public",
+  "post": "",
+  "bgColor": "",
+  "privacy": "",
   "gifUrl": "",
-  "profilePicture": "https://res.cloudinary.com/ddp4qz0zm/image/upload/v1691157127/64cd028569f77b18ec9f6730",
+  "profilePicture": "",
   "feelings": "",
-  "image": ""
+  "image": "<base64-encoded-string>"
 }
 
 ###
-GET {{baseUrl}}/{{urlPath}}/post/all/1
-Content-Type: application/json
-Accept: application/json
-withCredentials: true
-
-###
-GET {{baseUrl}}/{{urlPath}}/post/images/1
-Content-Type: application/json
-Accept: application/json
-withCredentials: true
-
-###
-DELETE {{baseUrl}}/{{urlPath}}/post/64cd028569f77b18ec9f6730
-Content-Type: application/json
-Accept: application/json
-withCredentials: true
-
-###
-PUT {{baseUrl}}/{{urlPath}}/post/image/64cd028569f77b18ec9f6730
+PUT {{baseUrl}}/{{urlPath}}/post/<postId>
 Content-Type: application/json
 Accept: application/json
 withCredentials: true,
 
 {
-  "post": "post with image",
-  "bgColor": "red",
-  "privacy": "Public",
+  "post": "",
+  "bgColor": "",
+  "privacy": "",
   "gifUrl": "",
-  "profilePicture": "https://res.cloudinary.com/ddp4qz0zm/image/upload/v1691157127/64cd028569f77b18ec9f6730",
-  "feelings": "sad",
-  "imgId": "p8jktvsccwqp3ayja0iq",
-  "imgVersion": "1659462367",
-  "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0gAAAMyAQMAAABtkHM/AAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAAAFiS0dEAf8CLd4AAABrSURBVBgZ7cGBAAAAAMOg+1NP4AjVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjgBSwwABwrL8wAAAAABJRU5ErkJggg=="
+  "profilePicture": "<cloudinary-user-profile-picture-url>",
+  "feelings": ""
 }
+
+###
+PUT {{baseUrl}}/{{urlPath}}/post/image/<postId>
+Content-Type: application/json
+Accept: application/json
+withCredentials: true,
+
+{
+  "post": "",
+  "bgColor": "",
+  "privacy": "",
+  "gifUrl": "",
+  "profilePicture": "<cloudinary-user-profile-picture-url>",
+  "feelings": "",
+  "imgId": "<imgId-form-post>",
+  "imgVersion": "<imgVersion-for-post>",
+  "image": "<base64-encoded-string>"
+}
+
+###
+DELETE {{baseUrl}}/{{urlPath}}/post/<postId>
+Content-Type: application/json
+Accept: application/json
+withCredentials: true

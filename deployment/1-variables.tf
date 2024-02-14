@@ -79,7 +79,7 @@ variable "ec2_instance_profile_name" {
 variable "elasticache_node_type" {
   description = "Elasticache Node Type"
   type        = string
-  default     = "cache.t3.micro"
+  default     = "cache.t2.micro"
 }
 
 variable "elasticache_parameter_group_name" {
@@ -97,7 +97,7 @@ variable "ec2_instance_type" {
 variable "bastion_host_type" {
   description = "Bastion Instance Type"
   type        = string
-  default     = "t3.micro"
+  default     = "t2.micro"
 }
 
 variable "code_deploy_role_name" {
