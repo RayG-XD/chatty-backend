@@ -176,7 +176,7 @@ jobs:
       - checkout
       - *show-current-branch-name
       - aws-cli/setup:
-          profile-name: default # This should be profile_name
+          profile_name: default # This should be profile_name
       - run:
           name: Terraform plan
           command: |
@@ -197,7 +197,7 @@ jobs:
     steps:
       - checkout
       - aws-cli/setup:
-          profile-name: default # This should be profile_name
+          profile_name: default # This should be profile_name
       - *zip-project
       - run:
           name: Upload project to S3
@@ -210,7 +210,7 @@ jobs:
     steps:
       - checkout
       - aws-cli/setup:
-          profile-name: default # This should be profile_name
+          profile_name: default # This should be profile_name
       - run:
           name: Deploy changes with AWS code deploy
           command: |
