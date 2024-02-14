@@ -7,20 +7,20 @@ executors:
   app-executor:
     docker:
       - image: cimg/node:18.17.1
-        entrypoint: /bin/bash
+        entrypoint: /bin/sh
       - image: cimg/redis:7.0.12
-        entrypoint: /bin/bash
+        entrypoint: /bin/sh
       - image: 'cibuilds/base:latest'
-        entrypoint: /bin/bash
+        entrypoint: /bin/sh
     working_directory: ~/repo
   terraform-executor:
     docker:
       - image: hashicorp/terraform:latest
-        entrypoint: /bin/bash
+        entrypoint: /bin/sh
   slack-executor:
     docker:
       - image: 'cibuilds/base:latest'
-        entrypoint: /bin/bash
+        entrypoint: /bin/sh
     resource_class: small
 
 aliases:
