@@ -182,7 +182,7 @@ jobs:
       - *show-current-branch-name
       - aws-cli/setup:
           profile_name: default # This should be profile_name
-          disable_aws_pager: false  # Add this line to disable the pager behavior
+          disable_aws_pager: true  # Add this line to disable the pager behavior
       - run:
           name: Terraform plan
           command: |
@@ -204,7 +204,7 @@ jobs:
       - checkout
       - aws-cli/setup:
           profile_name: default # This should be profile_name
-          disable_aws_pager: false  # Add this line to disable the pager behavior
+          disable_aws_pager: true  # Add this line to disable the pager behavior
       - *zip-project
       - run:
           name: Upload project to S3
@@ -218,7 +218,7 @@ jobs:
       - checkout
       - aws-cli/setup:
           profile_name: default # This should be profile_name
-          disable_aws_pager: false  # Add this line to disable the pager behavior
+          disable_aws_pager: true  # Add this line to disable the pager behavior
       - run:
           name: Deploy changes with AWS code deploy
           command: |
