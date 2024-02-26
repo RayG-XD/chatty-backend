@@ -7,7 +7,7 @@ resource "aws_alb_target_group" "server_backend_tg" {
 
   health_check {
     path                = "/health"
-    port                = "traffic-port"
+    port                = 5000
     protocol            = "HTTP"
     healthy_threshold   = 2
     unhealthy_threshold = 10

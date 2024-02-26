@@ -14,7 +14,7 @@ resource "aws_cloudwatch_metric_alarm" "ec2_scale_out_alarm" {
   alarm_name          = "EC2-SCALE-OUT-ALARM"
   alarm_description   = "This metric monitors EC2 CPU utilization"
   comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = "1"
+  evaluation_periods  = 1
   metric_name         = "CPUUtilization"
   namespace           = "AWS/EC2"
   period              = "120"
@@ -45,7 +45,7 @@ resource "aws_cloudwatch_metric_alarm" "ec2_scale_in_alarm" {
   alarm_name          = "EC2-SCALE-IN-ALARM"
   alarm_description   = "This metric monitors EC2 CPU utilization"
   comparison_operator = "LessThanOrEqualToThreshold"
-  evaluation_periods  = "1"
+  evaluation_periods  = 1
   metric_name         = "CPUUtilization"
   namespace           = "AWS/EC2"
   period              = "120"

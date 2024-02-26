@@ -39,7 +39,7 @@ resource "aws_alb_listener" "alb_http_listener" {
   default_action {
     type = "redirect"
     redirect {
-      port        = "443"
+      port        = 443
       protocol    = "HTTPS"
       status_code = "HTTP_301"
     }
@@ -47,7 +47,7 @@ resource "aws_alb_listener" "alb_http_listener" {
 }
 
 resource "aws_alb_listener_rule" "alb_https_listener_rule" {
-  listener_arn = aws_alb_listener.alb_http_listener.arn
+  listener_arn = aws_alb_listener.alb_https_listener.arn
   priority     = 100
   action {
     type             = "forward"

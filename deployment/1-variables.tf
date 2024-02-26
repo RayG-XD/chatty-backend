@@ -13,7 +13,7 @@ variable "vpc_cidr_block" {
 variable "vpc_availability_zones" {
   description = "VPC Availability Zones"
   type        = list(string)
-  default     = ["ap-south-1a", "ap-south-1b", "ap-south-1c"]
+  default     = ["ap-south-1a", "ap-south-1b"]
 }
 
 variable "vpc_public_subnets" {
@@ -79,25 +79,25 @@ variable "ec2_instance_profile_name" {
 variable "elasticache_node_type" {
   description = "Elasticache Node Type"
   type        = string
-  default     = "cache.t2.micro"
+  default     = "cache.t3.micro"
 }
 
 variable "elasticache_parameter_group_name" {
   description = "Elasticache Parameter Group Name"
   type        = string
-  default     = "default.redis6.x"
+  default     = "default.redis7.x"
 }
 
 variable "ec2_instance_type" {
   description = "EC2 Instance Type"
   type        = string
-  default     = "t2.medium"
+  default     = "t3.medium"
 }
 
 variable "bastion_host_type" {
   description = "Bastion Instance Type"
   type        = string
-  default     = "t2.micro"
+  default     = "t3.micro"
 }
 
 variable "code_deploy_role_name" {
@@ -109,11 +109,11 @@ variable "code_deploy_role_name" {
 variable "prefix" {
   description = "Prefix to be added to AWS resources tags"
   type        = string
-  default     = "edusticapp-server"
+  default     = "chatapp-server"
 }
 
 variable "project" {
   description = "Prefix to be added to AWS resources local tags"
   type        = string
-  default     = "edustic-chatapp-server"
+  default     = "chatapp-server"
 }
