@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket  = "edustic-chatty-app-terraform-state"
-    key     = "production/chatapp.tfstate"
+    key     = "develop/chatapp.tfstate"
     region  = "ap-south-1"
     encrypt = true
   }

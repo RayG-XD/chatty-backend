@@ -85,13 +85,13 @@ variable "elasticache_node_type" {
 variable "elasticache_parameter_group_name" {
   description = "Elasticache Parameter Group Name"
   type        = string
-  default     = "default.redis7.x"
+  default     = "default.redis7"
 }
 
 variable "ec2_instance_type" {
   description = "EC2 Instance Type"
   type        = string
-  default     = "t3.medium"
+  default     = "t3.large"
 }
 
 variable "bastion_host_type" {
