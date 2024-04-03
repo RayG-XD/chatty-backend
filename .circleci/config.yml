@@ -158,7 +158,7 @@ jobs:
        #   command: |
        #     sleep 3
         #    npm run test
-      - codecov/upload
+      # - codecov/upload
       - *notify-on-fail
 
   terraform-validate:
