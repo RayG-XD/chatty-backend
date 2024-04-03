@@ -152,7 +152,7 @@ describe('SignUp', () => {
       {
         username: 'Manny',
         email: 'manny@test.com',
-        password: 'mathematics1',
+        password: 'mathematics123456789876436534634',
         avatarColor: 'red',
         avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ=='
       }
