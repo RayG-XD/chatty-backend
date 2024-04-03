@@ -1,5 +1,9 @@
 # Edustic Chatty-App Backend
 
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/RayG-XD/chatty-backend/tree/develop.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/RayG-XD/chatty-backend/tree/develop)
+[![codecov](https://codecov.io/gh/RayG-XD/chatty-backend/graph/badge.svg?token=Q1U273CZ48)](https://codecov.io/gh/RayG-XD/chatty-backend)
+
+
 Backend Server of Edustic App - A dynamic real-time social networking application designed with Node.js, TypeScript, and employs Redis and MongoDB for seamless real-time interactions.It is developed using [node.js](https://nodejs.org/en/), [typescript](https://www.typescriptlang.org/), [redis](https://redis.io/download/) and [mongodb](https://www.mongodb.com/docs/manual/administration/install-community/).
 
 ## Features

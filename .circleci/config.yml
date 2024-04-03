@@ -15,7 +15,7 @@ executors:
     working_directory: ~/repo
   terraform-executor:
     docker:
-      - image: hashicorp/terraform:latest
+      - image: hashicorp/terraform:1.6.5
         entrypoint: /bin/sh
   slack-executor:
     docker:
