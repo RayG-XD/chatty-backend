@@ -109,11 +109,11 @@ variable "code_deploy_role_name" {
 variable "prefix" {
   description = "Prefix to be added to AWS resources tags"
   type        = string
-  default     = "chatapp-server"
+  default     = "edustic-chatapp-server"
 }
 
 variable "project" {
   description = "Prefix to be added to AWS resources local tags"
   type        = string
-  default     = "chatapp-server"
+  default     = "edustic-chatapp-server"
 }
