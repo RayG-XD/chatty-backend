@@ -153,6 +153,9 @@ jobs:
           name: Start redis server
           command: docker run --name chatapp-redis -p 6379:6379 -d redis
           background: true
+      - run:
+          name: Wait for Redis server to initialize
+          command: sleep 20 # Adjust the sleep duration as needed
       #- run:
       #    name: Run unit test
        #   command: |
