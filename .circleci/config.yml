@@ -155,7 +155,10 @@ jobs:
           background: true
       - run:
           name: Wait for Redis server to initialize
-          command: sleep 20 # Adjust the sleep duration as needed
+          command: sleep 30 # Adjust the sleep duration as needed
+      - run:
+          name: Check Redis server logs
+          command: docker logs chatapp-redis
       #- run:
       #    name: Run unit test
        #   command: |
